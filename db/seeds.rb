@@ -41,9 +41,7 @@ entries = [
     created_at: '2021-02-18',
     updated_at: '2021-02-18',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "When Thoughts Fracture…
-
-Redux and Nextjs are two very powerful tools for a web developer comfortable with React. Redux allows for one central store for all the state needs throughout an entire application. Nextjs is a framework designed for Server-Side Rendering (SSR) — opening the door for better SEO and faster load times. Individually, these tools can supercharge your web app. It then seems logical that used together, your app could rule the world.
+    content: "Redux and Nextjs are two very powerful tools for a web developer comfortable with React. Redux allows for one central store for all the state needs throughout an entire application. Nextjs is a framework designed for Server-Side Rendering (SSR) — opening the door for better SEO and faster load times. Individually, these tools can supercharge your web app. It then seems logical that used together, your app could rule the world.
 
 The problem is: Redux and Nextjs don’t seem to play very well together.
 
@@ -125,9 +123,7 @@ Happy coding!",
     created_at: '2021-02-25',
     updated_at: '2021-02-25',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "When Thoughts Fracture…
-
-Debugging can often be one of the biggest four-letter words in software development. But it shouldn’t be. For one, debugging happens. Every project ever coded will need to be debugged, because every project ever coded will mess up in some way or another, at least once (usually multiple times). Also, debugging teaches you more about how your code actually works than all the tutorials and classes put together. For that reason, here are some tips to help make debugging a little smoother and hopefully more fun.
+    content: "Debugging can often be one of the biggest four-letter words in software development. But it shouldn’t be. For one, debugging happens. Every project ever coded will need to be debugged, because every project ever coded will mess up in some way or another, at least once (usually multiple times). Also, debugging teaches you more about how your code actually works than all the tutorials and classes put together. For that reason, here are some tips to help make debugging a little smoother and hopefully more fun.
 
     READ every error message. Don’t just skim it, or say, “I have an error” then immediately ask for help or drop your code. Most error messages have a huge amount of information for you, and many are fairly straightforward. Sometimes they tell you exactly where in your code the issue lies. If not, then they usually tell you at least the ballpark area where your code failed, allowing you to zero in on it from there.
     Read the full stack trace. You may not want to do this every time, but at least every so often, you should read the full stack trace beginning to end. This helps you figure out the order in which the various pieces of your code are running, and the dependencies within that flow. Keep in mind that the actual failure point (your error) may be at either the top OR the bottom of the trace, depending on the language/framework you are using.
@@ -144,9 +140,7 @@ The most important thing about debugging is your attitude. See the issue as a ch
     created_at: '2021-03-04',
     updated_at: '2021-03-04',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "When Thoughts Fracture…
-
-Imposter Syndrome is the name for the feeling of “I don’t belong here; I’m not good enough” that many of us know all too well. It can show up anywhere in anyone, but seems to be most often referenced within the Software world. But it’s not unique to developers.
+    content: "Imposter Syndrome is the name for the feeling of “I don’t belong here; I’m not good enough” that many of us know all too well. It can show up anywhere in anyone, but seems to be most often referenced within the Software world. But it’s not unique to developers.
 
 I am currently in the job-hunting phase of my transition into Software Development, yet I have still dealt with this feeling multiple times. Transitioning into the military I dealt with it. I wasn’t big or strong like my peers. I am not an alpha personality. Yet, I am capable of extraordinary stubbornness, and I continued on.
 
@@ -171,9 +165,7 @@ So, believe in yourself first. The how will come after you have settled that, an
     created_at: '2021-03-11',
     updated_at: '2021-03-11',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "When Thoughts Fracture…
-
-Git is, according to git-scm.org, “a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.” But what does that mean? And why should you know it as a coder?
+    content: "Git is, according to git-scm.org, “a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.” But what does that mean? And why should you know it as a coder?
 
 To put it simply, git is what you use to both save and share your work. Think about it this way: you know how you always hear, “Save often”? Well, what does that really mean when coding? I mean, you have to save your work to even see the results of whatever changes you made anyway. And if you save junk code that breaks your project, then what? Rolling back to a previously saved version can be tough or even impossible, depending on your system.
 
@@ -208,9 +200,7 @@ Happy coding!"
     created_at: '2021-03-18',
     updated_at: '2021-03-18',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "When Thoughts Fracture…
-
-In preparation for this weekend’s Kick Start Hackathon held by Google, I started going through last year’s questions. The very first one I came to gave me difficulty. Given a set budget amount and a list of house prices, calculate the maximum number of houses you can buy. The logic seemed simple enough, and I quickly had a solution worked out in Ruby.
+    content: "In preparation for this weekend’s Kick Start Hackathon held by Google, I started going through last year’s questions. The very first one I came to gave me difficulty. Given a set budget amount and a list of house prices, calculate the maximum number of houses you can buy. The logic seemed simple enough, and I quickly had a solution worked out in Ruby.
 
 The difficulty came with the speed requirement: no more than 15 seconds per test set. When you think in the realm of realism, that is plenty of time. Kick Start, however, never stick to just “realistic” data sets. With a possible $100,000 to work with, house prices $1000 and below (wouldn’t that be nice!), and a possible 100,000 houses to choose from, the test sets get quite large. Large enough that the typical O(n log n) time complexity of Ruby’s built-in sort method times out and the answer fails.
 
