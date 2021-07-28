@@ -10,155 +10,28 @@ entries = [
     created_at: '2021-02-11',
     updated_at: '2021-02-11',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "<p>
-  I started programming long before I started coding. Programming is often
-  mis-defined. It’s not writing software code — that’s coding. Programming is
-  what enables coding to do the amazing things it does.
-</p>
-
-<p>Programming is a thought process.</p>
-
-<p>
-  To put it simply, programming is a trained skill that involves three steps:
-</p>
-
-<ol>
-  <p>Evaluate what the problem is. It’s impossible to solve a problem that hasn’t been definitively identified. Sometimes this can surprise you. For example, the problem with heavy traffic jams in one part of the city may initially seem to be too many cars on the road, but upon further inspection could be simply that a few stoplights in the middle of town are poorly timed for optimum traffic flow. Look into the problem and identify all possible causes. Then look closer at those causes and see if any of them are actually contributing to the issue. Once these have been identified, move on to step number two.</p>
-  <p>Clearly decide what the situation will look like once the issues are resolved. Plan this out as detailed as possible. Draw it, graph it, outline it, or whatever is needed for you to know exactly how it should be. Spare no detail — the more precisely you perform this step, the more accurately you can achieve the desired result.</p>
-  <p>Figure out how to get from point #1 to point #2. Oftentimes this involves multiple false starts and retries. The important part here is to keep moving. Don’t be afraid to scrap everything and start over. Many times during this stage you may find that your #1 answer wasn’t the actual root problem at all. That’s ok. Keep moving, don’t get discouraged. Measure your progress not by how much you have done or how much you have left to do, but simply by whether or not you can still take another step forward. If so, you are making progress.</p>
-  <p>Trust yourself. You saw the problem. You saw the final result. The solution will come to you.</p>
-</ol>
-
-<p>
-  And that’s it! Programming, once correctly defined, is actually something we
-  all do in almost every situation every day of our lives. Anyone can program.
-  Coders just train that thought process and apply it to writing languages that
-  computers understand.
-</p>",
+    content: "<p>I started programming long before I started coding.</p><p>Programming is often mis-defined. It’s not writing software code — that’s coding. Programming is what enables coding to do the amazing things it does. Programming is a thought process. To put it simply, programming is a trained skill that involves three steps:</p><ol><li>Evaluate what the problem is. It’s impossible to solve a problem that hasn’t been definitively identified. Sometimes this can surprise you. For example, the problem with heavy traffic jams in one part of the city may initially seem to be too many cars on the road, but upon further inspection could be simply that a few stoplights in the middle of town are poorly timed for optimum traffic flow. Look into the problem and identify all possible causes. Then look closer at those causes and see if any of them are actually contributing to the issue. Once these have been identified, move on to step number two.</li><li>Clearly decide what the situation will look like once the issues are resolved.Plan this out as detailed as possible. Draw it, graph it, outline it, or whatever is needed for you to know exactly how it should be. Spare no detail — the more precisely you perform this step, the more accurately you can achieve the desired result.</li><li>Figure out how to get from point #1 to point #2. Oftentimes this involves multiple false starts and retries. The important part here is to keep moving. Don’t be afraid to scrap everything and start over. Many times during this stage you may find that your #1 answer wasn’t the actual root problem at all. That’s ok. Keep moving, don’t get discouraged. Measure your progress not by how much you have done or how much you have left to do, but simply by whether or not you can still take another step forward. If so, you are making progress. Trust yourself. You saw the problem. You saw the final result. The solution will come to you.</li></ol><p>And that’s it! Programming, once correctly defined, is actually something we all do in almost every situation every day of our lives. Anyone can program. Coders just train that thought process and apply it to writing languages that computers understand.</p>",
   },
   {
     title: 'Redux + Nextjs WTF',
     created_at: '2021-02-18',
     updated_at: '2021-02-18',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "Redux and Nextjs are two very powerful tools for a web developer comfortable with React. Redux allows for one central store for all the state needs throughout an entire application. Nextjs is a framework designed for Server-Side Rendering (SSR) — opening the door for better SEO and faster load times. Individually, these tools can supercharge your web app. It then seems logical that used together, your app could rule the world.
-
-The problem is: Redux and Nextjs don’t seem to play very well together.
-
-This is not to say that using them together to get the specific features you want from each library is not possible; it’s just complicated.
-
-For that reason, I’d like to cover one of the more difficult parts of a Redux/Nextjs design that I’ve encountered: dynamic urls.
-
-Nextjs provides a simple-ish way to deal with dynamic urls. For this example, we’ll assume that the urls you are looking for match the pattern example.com/blog/:slug, where :slug is the dynamic part of the url. We’ll also assume that you’re using the next-redux-wrapper from kirill-konshin (which seems to be the almost-universally accepted package for dealing with this pair-up), and that you’ve followed the basic setup instructions on both nextjs.org and kirill’s GitHub.
-
-    In your pages folder, create a folder called blog
-    In your pages/blog folder, create a file called index.js
-    In pages/blog/index.js create your basic Post component. Mine looks like:
-
-const Post = props => {
-  const { post } = props
-  const { title, content, created_at, updated_at } = post  return (
-    <article>
-      <h2>{title}</h2>
-      <h6>{(created_at === updated_at) ? 'Posted at' : 'Updated at'} {updated_at}</h6>
-      <p>{content}</p>
-    </article>
-  )
-}export default Post
-
-4. Within the same file (but outside of your Post component), export an asynchronous function called getStaticPaths
-
-import { store } from '/path/to/store/setup/according/to/kirills/instructions'export const getStaticPaths = async () => {
-  let posts = store.getState().posts
-  if (posts.length < 1) {
-    const postAction = await store.dispatch(fetchAllPosts())
-    posts = postAction.payload.posts
-  }  const paths = posts.map(post => (
-    {
-      params: {
-        slug: post.slug,
-      },
-    }
-  ))  return {
-    paths,
-    fallback: true,
-  }
-}
-
-Note that for getStaticPaths to have access to the store, you must import it directly from your store setup file (or create it in this file, which is not recommended due to complexity). This is because getStaticPaths is one of the first functions run from this page (during SSR), and next-redux-wrapper does not provide a wrapper for getStaticPaths. Also, I chose fallback: true because I have a custom display if someone types in a url referencing a post that doesn’t exist (not featured here). You could set it to false if you prefer to throw a 404 instead. fetchAllPosts is a function in postActions that handles all the fetching from the API.
-
-5. getStaticPaths requires that you also export the asynchronous function getStaticProps
-
-import { storeWrapper } from '/path/to/store/setup/according/to/kirills/instructions'const getStaticProps = storeWrapper.getStaticProps(
-  async ({ store, params }) => {
-    let post
-    if (store.getState().posts && store.getState().posts.length > 1) {
-      post = store.getState().posts.filter(post_ => post_.slug === params.slug)[0]
-    } else {
-      const response = await fetch(`api.domain/posts/${params.slug}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })      post = await response.json()
-    }    return {
-      props: {
-        post,
-      },
-    }
-  }
-)
-
-Notice that this function is wrapped with the function you created in kirill’s setup (which I renamed as storeWrapper instead of wrapper for clarity). The store this function receives is that store (which is the same one you imported in the previous function). The params variable comes from getStaticPaths.
-
-That’s pretty much it. You’ll set up your actions and reducers as normal for redux with one exception: your actions must actually return the dispatched action objects, not just simply dispatch them.
-
-As you can see, setting up Redux with Nextjs takes a few extra tweaks, but it’s not too bad. Once you’re finished, the end result is quite amazing: pages rendered server side with a single source of truth for managing state in all your pages.
-
-Happy coding!",
+    content: "<p>    Redux and Nextjs are two very powerful tools for a web developer comfortable with React. Redux allows for one central store for all the state needs throughout an entire application. Nextjs is a framework designed for Server-Side Rendering (SSR) — opening the door for better SEO and faster load times. Individually, these tools can supercharge your web app. It then seems logical that used together, your app could rule the world.</p><p>    The problem is: Redux and Nextjs don’t seem to play very well together.</p><p>    This is not to say that using them together to get the specific features you want from each library is not possible; it’s just complicated.</p><p>    For that reason, I’d like to cover one of the more difficult parts of a Redux/Nextjs design that I’ve encountered: dynamic urls.</p><p>    Nextjs provides a simple-ish way to deal with dynamic urls. For this example, we’ll assume that the urls you are looking for match the pattern <code>example.com/blog/:slug</code>, where <code>:slug</code> is the dynamic part of the url. We’ll also assume that you’re using the next-redux-wrapper from <a href=\"https://github.com/kirill-konshin/next-redux-wrapper\">kirill-konshin</a> (which seems to be the almost-universally accepted package for dealing with this pair-up), and that you’ve followed the basic setup instructions on both nextjs.org and kirill’s GitHub.</p><ol>    <li>        <p>            In your pages folder, create a folder called <code>blog</code>.        </p>    </li>    <li>        <p>            In your pages/blog folder, create a file called <code>index.js</code>        </p>    </li>    <li>        <p>            In <code>pages/blog/index.js</code> create your basic Post component. Mine looks like:        </p>        <p>            <code>                <p>                    const Post = props =&gt; {<br />                    const { post } = props<br />                    const { title, content, created_at, updated_at } = post                </p>                <p>                    return (<br />                    &lt;article&gt;<br />                    &lt;h2&gt;{title}&lt;/h2&gt;<br />                    &lt;h6&gt;{(created_at === updated_at) ? &#39;Posted at&#39; : &#39;Updated at&#39;} {updated_at}&lt;/h6&gt;<br />                    &lt;p&gt;{content}&lt;/p&gt;<br />                    &lt;/article&gt;<br />                    )}<br />                    <br />                    export default Post                </p>            </code>        </p>    </li>    <li>        <p>            Within the same file (but outside of your Post component), export an asynchronous function called <code>getStaticPaths</code>        </p>        <p>            <code>                <p>                    import { store } from &#39;/path/to/store/setup/according/to/kirills/instructions&#39;                </p>                <p>                    export const getStaticPaths = async () =&gt; {                </p>                    <p>                        let posts = store.getState().posts                    </p>                    <p>                        if (posts.length &lt; 1) {<br />                            const postAction = await store.dispatch(fetchAllPosts())<br />                            posts = postAction.payload.posts<br />                        }                    </p>                    <p>                        const paths = posts.map(post =&gt; ({<br />                            params: {<br />                                slug: post.slug,<br />                            },<br />                        }))                    </p>                    <p>                        return {<br />                            paths,<br />                            fallback: true,<br />                        }<br />                    }                    </p>            </code>        </p>        <p>            Note that for <code>getStaticPaths</code> to have access to the store, you must import it directly from your store setup file (or create it in this file, which is not recommended due to complexity). This is because <code>getStaticPaths</code> is one of the first functions run from this page (during SSR), and <code>next-redux-wrapper</code> does not provide a wrapper for <code>getStaticPaths</code>. Also, I chose <code>fallback: true</code> because I have a custom display if someone types in a url referencing a post that doesn’t exist (not featured here). You could set it to false if you prefer to throw a <code>404</code> instead. <code>fetchAllPosts</code> is a function in <code>postActions</code> that handles all the fetching from the API.        </p>    </li>    <li>        <p>            <code>getStaticPaths</code> requires that you also export the asynchronous function <code>getStaticProps</code>        </p>        <p>        <code>            <p>                import { storeWrapper } from &#39;/path/to/store/setup/according/to/kirills/instructions&#39;            </p>            <p>                const getStaticProps = storeWrapper.getStaticProps(async ({ store, params }) =&gt; {<br />                <p>                    let post                </p>                <p>                    if (store.getState().posts &amp;&amp; store.getState().posts.length &gt; 1) {<br />                            post = store.getState().posts.filter(post_ =&gt; post_.slug === params.slug)[0]<br />                        } else {<br />                            const response = await fetch(<code>api.domain/posts/${params.slug}</code>, {<br />                                method: &#39;GET&#39;,<br />                                mode: &#39;cors&#39;,<br />                                headers: {<br />                                &#39;Content-Type&#39;: &#39;application/json&#39;,<br />                                },<br />                            })<br />                        post = await response.json()<br />                    }                </p>                <p>                    return {<br />                            props: {<br />                            post,<br />                        },<br />                    }                </p>                })            </p>        </code>        </p>        <p>            Notice that this function is wrapped with the function you created in kirill’s setup (which I renamed as <code>storeWrapper</code> instead of <code>wrapper</code> for clarity). The <code>store</code> this function receives is that <code>store</code> (which is the same one you imported in the previous function). The <code>params</code> variable comes from <code>getStaticPaths</code>.        </p>    </li></ol><p>    That’s pretty much it. You’ll set up your actions and reducers as normal for Redux with one exception: your actions must actually return the dispatched action objects, not just simply dispatch them. As you can see, setting up Redux with Nextjs takes a few extra tweaks, but it’s not too bad. Once you’re finished, the end result is quite amazing: pages rendered server side with a single source of truth for managing state in all your pages.</p><p>    Happy coding!</p>",
   },
   {
     title: 'Debugging WTF',
     created_at: '2021-02-25',
     updated_at: '2021-02-25',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "Debugging can often be one of the biggest four-letter words in software development. But it shouldn’t be. For one, debugging happens. Every project ever coded will need to be debugged, because every project ever coded will mess up in some way or another, at least once (usually multiple times). Also, debugging teaches you more about how your code actually works than all the tutorials and classes put together. For that reason, here are some tips to help make debugging a little smoother and hopefully more fun.
-
-    READ every error message. Don’t just skim it, or say, “I have an error” then immediately ask for help or drop your code. Most error messages have a huge amount of information for you, and many are fairly straightforward. Sometimes they tell you exactly where in your code the issue lies. If not, then they usually tell you at least the ballpark area where your code failed, allowing you to zero in on it from there.
-    Read the full stack trace. You may not want to do this every time, but at least every so often, you should read the full stack trace beginning to end. This helps you figure out the order in which the various pieces of your code are running, and the dependencies within that flow. Keep in mind that the actual failure point (your error) may be at either the top OR the bottom of the trace, depending on the language/framework you are using.
-    Try to see if you can solve the issue by yourself before googling the answer or reaching out for help. Most people learn far more from their own mistakes than any other training experience. You’re a better coder than you think. If you understood the information #1 and #2 gave you even a little bit, then you probably have at least an idea of where to look to fix your code. Start there.
-    Master Google-Fu. Whatever your favorite search engine, it is your best friend. If you can’t figure it out on your own, start searching for answers by copy/pasting the error message (just the error message, discerned in #1 above — don’t paste the entire stack). If your fortunate, you may get results that exactly match your situation. Most likely, you will need to read posts and articles that kind of match what you’re facing, sometimes many of them. The more you understand what your code SHOULD be doing and what it is ACTUALLY doing, the more you can filter out the information that doesn’t apply and apply that which does.
-    Ask. For. Help! This is not weakness or some symbol of failure as a developer/person/self-sufficient living organism. Identify the person or group of people most accessible to you who are most likely to answer the questions you have, explain your situation (politely and without complaining), and ask for insight. Then be open to the answers you receive. You may not like those answers. You may be told to completely rewrite your entire codebase. Accept it with a grain of salt, be gracious in your thanks, and again filter out the information that does not actually apply to your unique issue.
-    Rinse and repeat. Continue cycling through steps 1–3 until you find the answers you are looking for. Don’t spend too much time on any one step. If you stop making progress on one step, move on to the next, or start the process over, somewhat differently. Search for different but related terms, ask different people, reread your code, etc. Go back to when your code worked (version control like Git makes this much simpler) and trace through it manually until you find what went wrong.
-    Manage your emotions. Don’t snap at people trying to help you, even if they are completely wrong. Don’t berate yourself. You know what you are doing, and troubleshooting is a natural part of coding that all developers face. And if you get frustrated, walk away for a while. Go watch a movie, take a shower or a walk, play a game, something. Anything that is not actively looking at the problem. You’ll be amazed how often that will be the moment the solution comes to you.
-
-The most important thing about debugging is your attitude. See the issue as a challenge that you will overcome, and that is exactly what you will do. Happy coding!"
+    content: "<p>    Debugging can often be one of the biggest four-letter words in software development. But it shouldn’t be. For one, debugging happens. Every project ever coded will need to be debugged, because every project ever coded will mess up in some way or another, at least once (usually multiple times). Also, debugging teaches you more about how your code actually works than all the tutorials and classes put together. For that reason, here are some tips to help make debugging a little smoother and hopefully more fun.</p><ol>    <li>        <p>            READ every error message. Don’t just skim it, or say, “I have an error” then immediately ask for help or drop your code. Most error messages have a huge amount of information for you, and many are fairly straightforward. Sometimes they tell you exactly where in your code the issue lies. If not, then they usually tell you at least the ballpark area where your code failed, allowing you to zero in on it from there.        </p>    </li>    <li>        <p>            Read the full stack trace. You may not want to do this every time, but at least every so often, you should read the full stack trace beginning to end. This helps you figure out the order in which the various pieces of your code are running, and the dependencies within that flow. Keep in mind that the actual failure point (your error) may be at either the top OR the bottom of the trace, depending on the language/framework you are using.        </p>    </li>    <li>        <p>            Try to see if you can solve the issue by yourself before googling the answer or reaching out for help. Most people learn far more from their own mistakes than any other training experience. You’re a better coder than you think. If you understood the information #1 and #2 gave you even a little bit, then you probably have at least an idea of where to look to fix your code. Start there. Master Google-Fu. Whatever your favorite search engine, it is your best friend. If you can’t figure it out on your own, start searching for answers by copy/pasting the error message (just the error message, discerned in #1 above — don’t paste the entire stack). If you're fortunate, you may get results that exactly match your situation. Most likely, you will need to read posts and articles that kind of match what you’re facing, sometimes many of them. The more you understand what your code SHOULD be doing and what it is ACTUALLY doing, the more you can filter out the information that doesn’t apply and apply that which does.        </p>    </li>    <li>        <p>            Ask. For. Help! This is not weakness or some symbol of failure as a developer/person/self-sufficient living organism. Identify the person or group of people most accessible to you who are most likely to answer the questions you have, explain your situation (politely and without complaining), and ask for insight. Then be open to the answers you receive. You may not like those answers. You may be told to completely rewrite your entire codebase. Accept it with a grain of salt, be gracious in your thanks, and again filter out the information that does not actually apply to your unique issue.        </p>    </li>    <li>        <p>            Rinse and repeat. Continue cycling through steps 1–3 until you find the answers you are looking for. Don’t spend too much time on any one step. If you stop making progress on one step, move on to the next, or start the process over, somewhat differently. Search for different but related terms, ask different people, reread your code, etc. Go back to when your code worked (version control like Git makes this much simpler) and trace through it manually until you find what went wrong.        </p>    </li>    <li>        <p>            Manage your emotions. Don’t snap at people trying to help you, even if they are completely wrong. Don’t berate yourself. You know what you are doing, and troubleshooting is a natural part of coding that all developers face. And if you get frustrated, walk away for a while. Go watch a movie, take a shower or a walk, play a game, something. Anything that is not actively looking at the problem. You’ll be amazed how often that will be the moment the solution comes to you.        </p>    </li></ol><p>    The most important thing about debugging is your attitude. See the issue as a challenge that you will overcome, and that is exactly what you will do.</p><p>    Happy coding!  </p>  ",
   },
   {
     title: 'Imposter Syndrome WTF',
     created_at: '2021-03-04',
     updated_at: '2021-03-04',
     image_url: "https://picsum.photos/200?random=#{(Random.rand * 100).floor}",
-    content: "Imposter Syndrome is the name for the feeling of “I don’t belong here; I’m not good enough” that many of us know all too well. It can show up anywhere in anyone, but seems to be most often referenced within the Software world. But it’s not unique to developers.
-
-I am currently in the job-hunting phase of my transition into Software Development, yet I have still dealt with this feeling multiple times. Transitioning into the military I dealt with it. I wasn’t big or strong like my peers. I am not an alpha personality. Yet, I am capable of extraordinary stubbornness, and I continued on.
-
-Each time I was transferred to a different area of responsibility within the military, I felt it. Yet, I believe I can learn (almost) anything quickly, so I continued on.
-
-When I separated from the military into the entirely different world of Civilian and had to find a non-entry-level job for the first time, I felt it. But I had to provide for my family, so I pushed through the piles of applications and eventually landed a maintenance job.
-
-At that job, when I worked alone for the first time, I felt it. But I had no one else to call on for help, so I figured things out on my own. Whether the solutions I came up with were the optimal ones or not, I found out later. But I still found those solutions even though I felt like I had no idea what I was looking at.
-
-And even now, as I search for Software Development jobs, I have felt it. It got especially strong after I had been rejected by a few places and ignored by almost all the rest. I thought, “I obviously don’t stand out; what am I doing wrong?”
-
-The answer frustrated me. Nothing. I was not doing anything wrong. I was checking all the boxes, reaching out to people, not companies, applying to the companies of everyone I reached out to, and doing this several times a day. So I started to think that maybe I’m not as good at coding as I thought. But I knew that was a lie. I am a very talented coder, even if I am inexperienced. All the feedback I got during school said as much and more.
-
-So what was the real answer? My attitude. My belief that this process should be easier than it is, and that I was somehow insufficient because there are difficulties, *that* was what I was doing wrong.
-
-So what is the solution? It’s simple (though simple and easy are not the same thing): believe in myself. Yes, that sounds like a fortune cookie, but it is true. Proverbs says that what we think in our hearts is who we are. Translation: you are who you believe you are. Are you good enough? Do you know enough? Can you handle this? If you believe yes, then yes. You may not know how yet, but you know you can. However, if you believe no, then no amount of help, training or practice will ever change the fact that you are not good enough, because you will always be only as good as you believe you are.
-
-So, believe in yourself first. The how will come after you have settled that, and you will succeed at everything your hand touches. Happy coding!",
+    content: "<p>    Imposter Syndrome is the name for the feeling of &quot;I don’t belong here; I’m not good enough&quot; that many of us know all too well. It can show up anywhere in anyone, but seems to be most often referenced within the Software world. However, it’s not unique to developers.</p><p>    I am currently in the job-hunting phase of my transition into Software Development, yet I have still dealt with this feeling multiple times. Transitioning into the military I dealt with it. I wasn’t big or strong like my peers. I am not an alpha personality. Yet, I am capable of extraordinary stubbornness, and I continued on.</p><p>    Each time I was transferred to a different area of responsibility within the military, I felt it. Yet, I believe I can learn (almost) anything quickly, so I continued on.</p><p>    When I separated from the military into the entirely different world of Civilian and had to find a non-entry-level job for the first time, I felt it. But I had to provide for my family, so I pushed through the piles of applications and eventually landed a maintenance job.</p><p>    At that job, when I worked alone for the first time, I felt it. But I had no one else to call on for help, so I figured things out on my own. Whether the solutions I came up with were the optimal ones or not, I found out later. But I still found those solutions even though I felt like I had no idea what I was looking at.</p><p>    And even now, as I search for Software Development jobs, I have felt it. It got especially strong after I had been rejected by a few places and ignored by almost all the rest. I thought, &quot;I obviously don’t stand out; what am I doing wrong?&quot;</p><p>    The answer frustrated me: Nothing. I was not doing anything wrong. I was checking all the boxes, reaching out to people, not companies, applying to the companies of everyone I reached out to, and doing this several times a day. So I started to think that maybe I’m not as good at coding as I thought. But I knew that was a lie. I am a very talented coder, even if I am inexperienced. All the feedback I got during school said as much and more.</p><p>    So what was the real answer? My attitude. My belief that this process should be easier than it is, and that I was somehow insufficient because there are difficulties, *that* was what I was doing wrong.</p><p>    So what is the solution? It’s simple (though simple and easy are not the same thing): believe in myself. Yes, that sounds like a fortune cookie, but it is true. Proverbs says that what we think in our hearts is who we are. Translation: you are who you believe you are. Are you good enough? Do you know enough? Can you handle this? If you believe yes, then yes. You may not know how yet, but you know you can. However, if you believe no, then no amount of help, training or practice will ever change the fact that you are not good enough, because you will always be only as good as you believe you are.</p><p>    So, believe in yourself first. The how will come after you have settled that, and you will succeed at everything your hand touches.</p><p>    Happy coding!</p>",
   },
   {
     title: 'Git WTF',
