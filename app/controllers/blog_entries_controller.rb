@@ -8,7 +8,7 @@ class BlogEntriesController < ApplicationController
     render json: @blog_entries
   end
 
-  # GET /blog_entries/1
+  # GET /blog_entries/:slug
   def show
     render json: @blog_entry
   end
@@ -45,7 +45,7 @@ class BlogEntriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog_entry
-      @blog_entry = BlogEntry.find(params[:id])
+      @blog_entry = BlogEntry.find_by_slug(params[:slug])
     end
 
     # Only allow a list of trusted parameters through.
