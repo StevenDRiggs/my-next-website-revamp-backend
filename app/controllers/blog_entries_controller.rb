@@ -26,11 +26,12 @@ class BlogEntriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /blog_entries/1
+  # PATCH/PUT /blog_entries/:slug
   def update
-    @blog_entry.content = markdown(blog_entry_params[:content])
+    @blog_entry.assign_attributes(blog_entry_params)
+    @blog_entry.content = markdown(@blog_entry.content)
 
-    if @blog_entry.update(blog_entry_params)
+    if @blog_entry.save
       render json: @blog_entry
     else
       render json: @blog_entry.errors, status: :unprocessable_entity

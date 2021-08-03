@@ -94,3 +94,7 @@ for entry in entries do
 
   puts 'BlogEntry created!'
 end
+
+User.destroy_all
+
+User.create!(username: 'admin', password: 'password', is_admin: true, email: 'admin@admin.com', image_url: 'https://picsum.photos/100')
