@@ -38,7 +38,7 @@ class BlogEntriesController < ApplicationController
     end
   end
 
-  # DELETE /blog_entries/1
+  # DELETE /blog_entries/:slug
   def destroy
     @blog_entry.destroy
   end
