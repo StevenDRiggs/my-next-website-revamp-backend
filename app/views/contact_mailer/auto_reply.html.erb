@@ -1,0 +1,50 @@
+<h3>
+  Thank you for reaching out, <%= @contact[:name] %>!
+</h3>
+<p>
+  I will be contacting you soon at this email in response to your message below.
+</p>
+<div id='message'>
+  <h5>
+    Your message:
+  </h5>
+  <q>
+    <%= @contact[:message] %>
+  </q>
+</div>
+
+<br /><br /><br />
+
+<div id='aboutMe'>
+  <%= image_tag 'Steven_Riggs_photo_cropped.png' %>
+  <div>
+    Sincerely,
+    <div>
+      <div>
+        <b>
+          <font size="4" color="#274e13">
+            Steven Riggs
+          </font>
+        </b>
+      </div>
+      <div>
+        <font color="#0c343d">
+          <a href="https://stevendriggs.herokuapp.com" target="_blank">
+            stevendriggs.herokuapp.com
+          </a>
+        </font>
+      </div>
+      <div>
+        <font color="#0c343d">
+          <a href="https://github.com/StevenDRiggs" target="_blank">
+            <img src="https://docs.google.com/uc?export=download&amp;id=1pJtuntT4-QF_tWhNi2RGplq0oulrE_PS&amp;revid=0B97ozO6jlWhxRkoxbkNDRVVsN2paS3ZpY2d2d2k2UXhZeGo4PQ">
+          </a>
+          &nbsp;&nbsp;
+          <a href="https://www.linkedin.com/in/steven-riggs/" target="_blank">
+            <img src="https://docs.google.com/uc?export=download&amp;id=19J3EhuAgEyQZRh3s_lDMpt4FUJ75Jnyo&amp;revid=0B97ozO6jlWhxeFNLdjFEQmVIVm5RQmQyNTdreFBxY2NjQ3JFPQ">
+          </a>
+        </font>
+      </div>
+    </div>
+  </div>
+</div>

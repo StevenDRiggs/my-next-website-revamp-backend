@@ -29,4 +29,10 @@ class ApplicationController < ActionController::API
       end
     end
   end
+
+  def contact
+    @contact = params[:contact]
+
+    ContactMailer.with(contact: @contact).auto_reply.deliver_later
+  end
 end
