@@ -34,5 +34,6 @@ class ApplicationController < ActionController::API
     @contact = params[:contact]
 
     ContactMailer.with(contact: @contact).auto_reply.deliver_later
+    ContactMailer.with(contact: @contact).contact_me.deliver_later
   end
 end
