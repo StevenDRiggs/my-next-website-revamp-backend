@@ -105,4 +105,4 @@ end
 
 User.destroy_all
 
-User.create!(username: 'admin', password: 'password', is_admin: true, email: 'admin@admin.com', image_url: 'https://picsum.photos/100')
+User.create!(username: Rails.application.credentials.admin_username, password: Rails.application.credentials.admin_password, is_admin: true, email: Rails.application.credentials.contact_email, image_url: 'https://picsum.photos/100')
