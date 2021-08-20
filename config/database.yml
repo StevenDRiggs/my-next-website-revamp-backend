@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: mnwr_backend_production
-  # username: backend
-  # password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials.db_url %>
+  username: <%= Rails.application.credentials.db_username %>
+  password: <%= Rails.application.credentials.db_password %>
