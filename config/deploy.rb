@@ -23,8 +23,8 @@ set :migration_role, :app
 set :rails_env, 'production'
 
 set :db_remote_clean, true
-set :db_local, true
-set :db_ignore_tables, []
+set :db_local_clean, true
+set :db_ignore_tables, [mnwr_backend_production]
 
 namespace :deploy do
   desc 'Restart application'
