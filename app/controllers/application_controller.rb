@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   def encode_token(payload)
-    secret_key_base = Rails.application.credentials.secret_key_base
+    secret_key_base = Rails.credentials.secret_key_base
 
     exp_payload = {
       data: payload,
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
   end
 
   def decoded_token
-    secret_key_base = Rails.application.credentials.secret_key_base
+    secret_key_base = Rails.credentials.secret_key_base
 
     if auth_header
       token = auth_header.split(' ')[1]
