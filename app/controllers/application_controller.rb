@@ -31,9 +31,17 @@ class ApplicationController < ActionController::API
   end
 
   def contact
-    @contact = params[:contact]
+    @contact = contact_params
 
-    ContactMailer.with(contact: @contact).auto_reply.deliver_later
+    ContactMailer.with(contact: @contact).auto_reply.deliver_now
     ContactMailer.with(contact: @contact).contact_me.deliver_later
+
+    render json: @contact
+  end
+
+  private
+
+  def contact_params
+    params.require(:contact).permit([:name, :email, :message])
   end
 end
